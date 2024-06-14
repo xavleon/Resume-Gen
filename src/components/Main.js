@@ -3,6 +3,7 @@ import React from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import Builder from "./Builder";
 import ResumePreview from "./ResumePreview";
+import ThemeSelect from "./Theme/ThemeSelect";
 
 const Main = () => {
   return (
@@ -10,14 +11,23 @@ const Main = () => {
       <Heading as="h4" size="xl" textAlign="center" mb={12}>
         Builder Dashboard
       </Heading>
-      <Container maxW={"5xl"}>
+      <Container
+        maxW={"5xl"}
+        p={8}
+        bg={"white"}
+        display={"flex"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        flexDirection={{ base: "column", md: "row" }}
+        boxShadow={"md"}
+        borderRadius={8}
+      >
         {/* Theme Select */}
+        <ThemeSelect />
         <Button
           colorScheme="blue"
           variant="solid"
-          size="lg"
           mb={4}
-          w={"full"}
           rightIcon={<MdOutlineFileDownload />}
         >
           Download

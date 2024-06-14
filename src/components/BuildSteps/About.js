@@ -6,15 +6,37 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 const About = () => {
+  const [image, setImage] = useState(null);
+
   return (
     <div>
       <Stack spacing={4}>
-        <Button colorScheme="teal" variant="outline" size="lg">
-          Upload Image
-        </Button>
+        {!image ? (
+          <ImageUpload setImage={setImage} />
+        ) : (
+          <>
+            <img
+              src={image}
+              alt="profile"
+              width={200}
+              height={200}
+              style={{ borderRadius: "50%" }}
+            />
+
+            <Button
+              colorScheme="red"
+              variant="solid"
+              onClick={() => setImage(null)}
+            >
+              Remove Image
+            </Button>
+          </>
+        )}
+
         <HStack spacing={6}>
           <FormControl isRequired>
             <FormLabel>Full Name</FormLabel>
