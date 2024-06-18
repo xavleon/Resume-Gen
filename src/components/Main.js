@@ -1,11 +1,18 @@
 import { Button, Container, Heading, Stack } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import Builder from "./Builder";
 import ResumePreview from "./ResumePreview";
 import ThemeSelect from "./Theme/ThemeSelect";
+import { useReactToPrint } from "react-to-print";
 
 const Main = () => {
+  const printElement = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => printElement.current,
+  });
+
   return (
     <Container w={"full"} maxW={"7xl"} py={12}>
       <Heading as="h4" size="xl" textAlign="center" mb={12}>
@@ -29,6 +36,7 @@ const Main = () => {
           variant="solid"
           mb={4}
           rightIcon={<MdOutlineFileDownload />}
+          onClick={handlePrint}
         >
           Download
         </Button>
@@ -45,7 +53,7 @@ const Main = () => {
         justifyContent={"space-between"}
       >
         <Builder />
-        <ResumePreview />
+        <ResumePreview printElement={printElement} />
       </Stack>
     </Container>
   );
