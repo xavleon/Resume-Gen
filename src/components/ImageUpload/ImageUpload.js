@@ -1,12 +1,24 @@
 import React from "react";
 import Files from "react-files";
 
+import { useDispatch } from "react-redux";
+
 import "./ImageUpload.css";
+import { changeAbout } from "../../store/aboutSlice";
 
 const ImageUpload = ({ setImage }) => {
+  const dispatch = useDispatch();
+
   const handleChange = (files) => {
     // LOGIC TO HANDLE FILE CHANGE
     setImage(files[0].preview.url);
+
+    dispatch(
+      changeAbout({
+        name: "picture",
+        value: files[0].preview.url,
+      })
+    );
   };
 
   const handleError = (error, file) => {

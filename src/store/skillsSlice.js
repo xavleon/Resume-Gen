@@ -18,7 +18,6 @@ const skillSlice = createSlice({
   initialState,
   reducers: {
     addSkill(state, action) {
-      console.log(action.payload);
       state = state.push(action.payload);
     },
   },

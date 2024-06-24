@@ -20,27 +20,33 @@ const ResumePreview = ({ printElement }) => {
   const theme = useSelector((state) => state.theme);
   const about = useSelector((state) => state.about);
   const skills = useSelector((state) => state.skills);
+  const projects = useSelector((state) => state.projects);
 
+  console.log(about);
   return (
     <Box w={"full"} bg={"white"} minH={"100vh"} shadow={"md"}>
       <div ref={printElement}>
         {/* Picture + Intro */}
         <HStack>
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSooCX-nPSHN0kCVdUnm-eptCPvUF04YaxeHQ&s"
+            src={
+              about.picture
+                ? about.picture
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSooCX-nPSHN0kCVdUnm-eptCPvUF04YaxeHQ&s"
+            }
             alt="User Avatar"
             width={"115px"}
             height={"115px"}
-            borderRadius={"50%"}
+            style={{
+              borderRadius: "50%",
+            }}
           />
 
           <VStack>
             <Heading variant="h4" size="md">
               {about.name}
             </Heading>
-            <Text color="gray.500" ml={8}>
-              {about.role}
-            </Text>
+            <Text ml={8}>{about.role}</Text>
           </VStack>
         </HStack>
 
@@ -55,22 +61,22 @@ const ResumePreview = ({ printElement }) => {
         >
           <HStack spacing={1}>
             <MdMail />
-            <Text color="gray.500">{about.email}</Text>
+            <Text>{about.email}</Text>
           </HStack>
 
           <HStack spacing={1}>
             <MdLocalPhone />
-            <Text color="gray.500">{about.phone}</Text>
+            <Text>{about.phone}</Text>
           </HStack>
 
           <HStack spacing={1}>
             <MdLocationPin />
-            <Text color="gray.500">{about.address}</Text>
+            <Text>{about.address}</Text>
           </HStack>
 
           <HStack spacing={1}>
             <RxLinkedinLogo />
-            <Text color="gray.500">{about.linkedin}</Text>
+            <Text>{about.linkedin}</Text>
           </HStack>
         </HStack>
 
@@ -190,40 +196,30 @@ const ResumePreview = ({ printElement }) => {
             </Heading>
 
             {/* List */}
-            <VStack
-              align={"flex-start"}
-              spacing={2}
-              borderBottom={"1px"}
-              mb={4}
-              pb={4}
-            >
-              <Text color="gray.500">Project Name</Text>
-              <UnorderedList pl={5}>
-                <ListItem>
-                  <Text fontSize={"sm"} as="p">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Dolorem, odit!
+            {projects.map((project) => (
+              <VStack
+                align={"flex-start"}
+                spacing={2}
+                borderBottom={"1px"}
+                mb={4}
+                pb={4}
+              >
+                <HStack s>
+                  <Text>{project.title}</Text>
+                  <Text color="gray.500">
+                    <a href={project.url}> Link</a>
                   </Text>
-                </ListItem>
-              </UnorderedList>
-            </VStack>
-            <VStack
-              align={"flex-start"}
-              spacing={2}
-              borderBottom={"1px"}
-              mb={4}
-              pb={4}
-            >
-              <Text color="gray.500">Project Name</Text>
-              <UnorderedList pl={5}>
-                <ListItem>
-                  <Text fontSize={"sm"} as="p">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Dolorem, odit!
-                  </Text>
-                </ListItem>
-              </UnorderedList>
-            </VStack>
+                </HStack>
+
+                <UnorderedList pl={5}>
+                  <ListItem>
+                    <Text fontSize={"sm"} as="p">
+                      {project.description}
+                    </Text>
+                  </ListItem>
+                </UnorderedList>
+              </VStack>
+            ))}
           </VStack>
         </HStack>
       </div>

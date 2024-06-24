@@ -15,8 +15,6 @@ import { changeAbout } from "../../store/aboutSlice";
 const About = () => {
   const [image, setImage] = useState(null);
 
-  const about = useSelector((state) => state.about);
-
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -48,7 +46,15 @@ const About = () => {
             <Button
               colorScheme="red"
               variant="solid"
-              onClick={() => setImage(null)}
+              onClick={() => {
+                setImage(null);
+                dispatch(
+                  changeAbout({
+                    name: "picture",
+                    value: "",
+                  })
+                );
+              }}
             >
               Remove Image
             </Button>
