@@ -1,8 +1,13 @@
 import React from "react";
 import { HStack, useRadioGroup } from "@chakra-ui/react";
 import ThemeOption from "./ThemeOption";
+import { switchTheme } from "../../store/themeSlice";
+
+import { useDispatch } from "react-redux";
 
 const ThemeSelect = () => {
+  const dispatch = useDispatch();
+
   const options = [
     "purple.400",
     "blue.400",
@@ -16,7 +21,7 @@ const ThemeSelect = () => {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "color",
     value: "blue",
-    onChange: (value) => console.log(value),
+    onChange: (value) => dispatch(switchTheme(value)),
   });
 
   return (

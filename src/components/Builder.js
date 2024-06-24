@@ -5,8 +5,11 @@ import Education from "./BuildSteps/Education";
 import Skills from "./BuildSteps/Skills";
 import Experience from "./BuildSteps/Experience";
 import Projects from "./BuildSteps/Projects";
+import { useSelector } from "react-redux";
 
 const Builder = () => {
+  const theme = useSelector((state) => state.theme);
+
   return (
     <Box
       w={{ base: "full", md: "50%" }}
@@ -14,6 +17,10 @@ const Builder = () => {
       bg={"white"}
       borderRadius={8}
       boxShadow={"md"}
+      style={{
+        border: `1px solid ${theme.color} !important `,
+      }}
+      borderColor={theme.color}
     >
       <Tabs>
         <TabList>

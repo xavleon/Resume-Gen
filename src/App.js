@@ -8,7 +8,6 @@ function App() {
   return (
     <div>
       <Navbar />
-
       <Header />
       <Main />
       <Footer />

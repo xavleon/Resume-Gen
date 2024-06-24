@@ -8,9 +8,27 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ImageUpload from "../ImageUpload/ImageUpload";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { changeAbout } from "../../store/aboutSlice";
 
 const About = () => {
   const [image, setImage] = useState(null);
+
+  const about = useSelector((state) => state.about);
+
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    dispatch(
+      changeAbout({
+        name,
+        value,
+      })
+    );
+  };
 
   return (
     <div>
@@ -46,6 +64,7 @@ const About = () => {
               name="name"
               placeholder="Full Name"
               variant="filled"
+              onChange={handleChange}
             />
           </FormControl>
 
@@ -55,6 +74,7 @@ const About = () => {
             <Input
               type="text"
               name="role"
+              onChange={handleChange}
               placeholder="Role"
               variant="filled"
             />
@@ -70,6 +90,7 @@ const About = () => {
               name="email"
               placeholder="Email"
               variant="filled"
+              onChange={handleChange}
             />
           </FormControl>
 
@@ -81,6 +102,7 @@ const About = () => {
               name="phone"
               placeholder="Phone"
               variant="filled"
+              onChange={handleChange}
             />
           </FormControl>
         </HStack>
@@ -91,6 +113,7 @@ const About = () => {
 
             <Input
               type="text"
+              onChange={handleChange}
               name="address"
               placeholder="Address"
               variant="filled"
@@ -105,6 +128,7 @@ const About = () => {
               name="linkedin"
               placeholder="https://www.linkedin.com/"
               variant="filled"
+              onChange={handleChange}
             />
           </FormControl>
         </HStack>

@@ -1,10 +1,11 @@
-import { Button, Container, Heading, Stack } from "@chakra-ui/react";
+import { Button, Container, Heading, Stack, theme } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import Builder from "./Builder";
 import ResumePreview from "./ResumePreview";
 import ThemeSelect from "./Theme/ThemeSelect";
 import { useReactToPrint } from "react-to-print";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const printElement = useRef();
@@ -12,6 +13,9 @@ const Main = () => {
   const handlePrint = useReactToPrint({
     content: () => printElement.current,
   });
+
+  const theme = useSelector((state) => state.theme);
+  console.log(theme);
 
   return (
     <Container w={"full"} maxW={"7xl"} py={12}>
@@ -33,6 +37,7 @@ const Main = () => {
         <ThemeSelect />
         <Button
           colorScheme="blue"
+          bg={theme.color}
           variant="solid"
           mb={4}
           rightIcon={<MdOutlineFileDownload />}

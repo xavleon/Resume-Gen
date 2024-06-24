@@ -15,7 +15,12 @@ import React from "react";
 import { MdLocalPhone, MdLocationPin, MdMail } from "react-icons/md";
 
 import { RxLinkedinLogo } from "react-icons/rx";
+import { useSelector } from "react-redux";
 const ResumePreview = ({ printElement }) => {
+  const theme = useSelector((state) => state.theme);
+  const about = useSelector((state) => state.about);
+  const skills = useSelector((state) => state.skills);
+
   return (
     <Box w={"full"} bg={"white"} minH={"100vh"} shadow={"md"}>
       <div ref={printElement}>
@@ -31,17 +36,17 @@ const ResumePreview = ({ printElement }) => {
 
           <VStack>
             <Heading variant="h4" size="md">
-              Talha Tariq
+              {about.name}
             </Heading>
             <Text color="gray.500" ml={8}>
-              Software Engineer
+              {about.role}
             </Text>
           </VStack>
         </HStack>
 
         {/* Other Info */}
         <HStack
-          bg="gray.100"
+          bg={theme.color}
           spacing={4}
           wrap={"wrap"}
           align={"flex-start"}
@@ -50,22 +55,22 @@ const ResumePreview = ({ printElement }) => {
         >
           <HStack spacing={1}>
             <MdMail />
-            <Text color="gray.500">tt.talhat@gmail.com</Text>
+            <Text color="gray.500">{about.email}</Text>
           </HStack>
 
           <HStack spacing={1}>
             <MdLocalPhone />
-            <Text color="gray.500">03064685191</Text>
+            <Text color="gray.500">{about.phone}</Text>
           </HStack>
 
           <HStack spacing={1}>
             <MdLocationPin />
-            <Text color="gray.500">Lahore, Pakistan</Text>
+            <Text color="gray.500">{about.address}</Text>
           </HStack>
 
           <HStack spacing={1}>
             <RxLinkedinLogo />
-            <Text color="gray.500">tt.talhat@gmail.com</Text>
+            <Text color="gray.500">{about.linkedin}</Text>
           </HStack>
         </HStack>
 
@@ -165,46 +170,16 @@ const ResumePreview = ({ printElement }) => {
 
             {/* List */}
             <Wrap>
-              <Tag
-                size={"md"}
-                borderRadius={"md"}
-                bg={"gray"}
-                variant={"solid"}
-              >
-                <TagLabel>HTML</TagLabel>
-              </Tag>
-              <Tag
-                size={"md"}
-                borderRadius={"md"}
-                bg={"gray"}
-                variant={"solid"}
-              >
-                <TagLabel>HTML</TagLabel>
-              </Tag>
-              <Tag
-                size={"md"}
-                borderRadius={"md"}
-                bg={"gray"}
-                variant={"solid"}
-              >
-                <TagLabel>HTML</TagLabel>
-              </Tag>
-              <Tag
-                size={"md"}
-                borderRadius={"md"}
-                bg={"gray"}
-                variant={"solid"}
-              >
-                <TagLabel>HTML</TagLabel>
-              </Tag>
-              <Tag
-                size={"md"}
-                borderRadius={"md"}
-                bg={"gray"}
-                variant={"solid"}
-              >
-                <TagLabel>HTML</TagLabel>
-              </Tag>
+              {skills.map((skill, index) => (
+                <Tag
+                  size={"md"}
+                  borderRadius={"md"}
+                  bg={theme.color}
+                  variant={"solid"}
+                >
+                  <TagLabel>{skill.name}</TagLabel>
+                </Tag>
+              ))}
             </Wrap>
           </VStack>
 
