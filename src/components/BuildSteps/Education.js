@@ -16,11 +16,21 @@ import React, { useState } from "react";
 
 import { FaTrash } from "react-icons/fa";
 
-const Education = () => {
-  const [educationList, setEducationList] = useState([]);
+import {
+  addEducation,
+  changeEducation,
+  removeEducation,
+} from "../../store/educationSlice";
 
-  const addEducation = () => {
-    setEducationList([...educationList, "new"]);
+import { useDispatch, useSelector } from "react-redux";
+
+const Education = () => {
+  const educationList = useSelector((state) => state.education);
+  const dispatch = useDispatch();
+
+  const handleChange = (e, id) => {
+    const { name, value } = e.target;
+    dispatch(changeEducation({ id, name, value }));
   };
 
   return (
@@ -42,17 +52,35 @@ const Education = () => {
                 justifyContent={"space-between"}
               >
                 <Text fontWeight="semibold">
-                  Bachelor's Degree in Computer Science
+                  {deg.degree ? deg.degree : "Title"}
                 </Text>
-                <FaTrash color="red" />
+
+                <FaTrash
+                  onClick={() => {
+                    dispatch(removeEducation(deg.id));
+                  }}
+                  color="red"
+                />
               </Box>
             </AccordionButton>
             <AccordionPanel pb={4}>
               {/* Degree & Type */}
 
               <VStack spacing={2} align="start">
-                <Input placeholder="Degree" variant="filled" />
-                <Input placeholder="Type" variant="filled" />
+                <Input
+                  value={deg.degree}
+                  placeholder="Degree"
+                  variant="filled"
+                  name="degree"
+                  onChange={(e) => handleChange(e, deg.id)}
+                />
+                <Input
+                  onChange={(e) => handleChange(e, deg.id)}
+                  value={deg.type}
+                  placeholder="Type"
+                  name="type"
+                  variant="filled"
+                />
               </VStack>
 
               {/* Data*/}
@@ -60,17 +88,35 @@ const Education = () => {
               <HStack spacing={4} mt={4}>
                 <FormControl isRequired>
                   <FormLabel>Start Year</FormLabel>
-                  <Input placeholder="Start Year" variant="filled" />
+                  <Input
+                    value={deg.start}
+                    placeholder="Start Year"
+                    variant="filled"
+                    name="start"
+                    onChange={(e) => handleChange(e, deg.id)}
+                  />
                 </FormControl>
 
                 <FormControl isRequired>
                   <FormLabel>End Year</FormLabel>
-                  <Input placeholder="End Year" variant="filled" />
+                  <Input
+                    value={deg.end}
+                    placeholder="End Year"
+                    variant="filled"
+                    name="end"
+                    onChange={(e) => handleChange(e, deg.id)}
+                  />
                 </FormControl>
 
                 <FormControl isRequired>
                   <FormLabel>Grade</FormLabel>
-                  <Input placeholder="Grade" variant="filled" />
+                  <Input
+                    value={deg.grade}
+                    placeholder="Grade"
+                    variant="filled"
+                    name="grade"
+                    onChange={(e) => handleChange(e, deg.id)}
+                  />
                 </FormControl>
               </HStack>
             </AccordionPanel>
@@ -78,9 +124,16 @@ const Education = () => {
         </Accordion>
       ))}
 
-      <Button colorScheme="blue" variant="solid" mt={4} onClick={addEducation}>
-        Add Education
-      </Button>
+      {educationList.length < 4 && (
+        <Button
+          colorScheme="blue"
+          variant="solid"
+          mt={4}
+          onClick={() => dispatch(addEducation())}
+        >
+          Add Education
+        </Button>
+      )}
     </div>
   );
 };

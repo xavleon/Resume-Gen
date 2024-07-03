@@ -20,9 +20,12 @@ const skillSlice = createSlice({
     addSkill(state, action) {
       state = state.push(action.payload);
     },
+    removeSkill(state, action) {
+      return state.filter((skill) => skill.id !== action.payload);
+    },
   },
 });
 
-export const { addSkill } = skillSlice.actions;
+export const { addSkill, removeSkill } = skillSlice.actions;
 
 export default skillSlice.reducer;

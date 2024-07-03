@@ -21,6 +21,8 @@ const ResumePreview = ({ printElement }) => {
   const about = useSelector((state) => state.about);
   const skills = useSelector((state) => state.skills);
   const projects = useSelector((state) => state.projects);
+  const education = useSelector((state) => state.education);
+  const experience = useSelector((state) => state.experience);
 
   console.log(about);
   return (
@@ -100,59 +102,53 @@ const ResumePreview = ({ printElement }) => {
             </Heading>
 
             {/* List */}
-            <VStack
-              align={"flex-start"}
-              spacing={2}
-              borderBottom={"1px"}
-              mb={4}
-              pb={4}
-            >
-              <Text color="gray.500">BSc. Computer Science</Text>
-              <Text color="gray.500">
-                University of Engineering and Technology
-              </Text>
-              <Text color="gray.500">2016 - 2020</Text>
-            </VStack>
-            <VStack align={"flex-start"} spacing={2}>
-              <Text color="gray.500">BSc. Computer Science</Text>
-              <Text color="gray.500">
-                University of Engineering and Technology
-              </Text>
-              <Text color="gray.500">2016 - 2020</Text>
-            </VStack>
+            {education.map((edu) => (
+              <VStack
+                align={"flex-start"}
+                spacing={2}
+                borderBottom={"1px"}
+                mb={4}
+                pb={4}
+                width={"100%"}
+              >
+                <Text color="gray.500">
+                  {edu.degree} ({edu.grade})
+                </Text>
+                <Text color="gray.500">{edu.type}</Text>
+                <Text color="gray.500">
+                  {edu.start} - {edu.end}
+                </Text>
+              </VStack>
+            ))}
           </VStack>
 
           {/* Work Experience */}
-          <VStack alignItems={"flex-start"}>
+          <VStack alignItems={"flex-start"} width={"100%"}>
             <Heading variant="h4" size="md">
               Work Experience
             </Heading>
-
-            {/* List */}
-            <VStack
-              align={"flex-start"}
-              spacing={2}
-              borderBottom={"1px"}
-              mb={4}
-              pb={4}
-            >
-              <Text color="gray.500">Senior Engineer</Text>
-              <Text color="gray.500">Google, Mountain View, California</Text>
-              <Text color="gray.500">2016 - 2020</Text>
-              <Text color="gray.500">
-                Worked on the Google Search Engine and improved the search
-                algorithm
-              </Text>
-            </VStack>
-            <VStack align={"flex-start"} spacing={2}>
-              <Text color="gray.500">Senior Engineer</Text>
-              <Text color="gray.500">Google, Mountain View, California</Text>
-              <Text color="gray.500">2016 - 2020</Text>
-              <Text color="gray.500">
-                Worked on the Google Search Engine and improved the search
-                algorithm
-              </Text>
-            </VStack>
+            {experience.map((exp) => {
+              {
+                /* List */
+              }
+              return (
+                <VStack
+                  align={"flex-start"}
+                  spacing={2}
+                  borderBottom={"1px"}
+                  mb={4}
+                  pb={4}
+                  width={"100%"}
+                >
+                  <Text color="gray.500">{exp.role}</Text>
+                  <Text color="gray.500">{exp.company}</Text>
+                  <Text color="gray.500">
+                    {exp.start} - {exp.end}
+                  </Text>
+                  <Text color="gray.500">{exp.description}</Text>
+                </VStack>
+              );
+            })}
           </VStack>
         </HStack>
 

@@ -6,6 +6,8 @@ import themeReducer from "./themeSlice";
 import aboutReducer from "./aboutSlice";
 import skillReducer from "./skillsSlice";
 import projectReducer from "./projectSlice";
+import educationReducer from "./educationSlice";
+import experienceReducer from "./experienceSlice";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +15,8 @@ const store = configureStore({
     about: aboutReducer,
     skills: skillReducer,
     projects: projectReducer,
+    education: educationReducer,
+    experience: experienceReducer,
   },
 });
 

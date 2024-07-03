@@ -12,7 +12,7 @@ import {
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addSkill } from "../../store/skillsSlice";
+import { addSkill, removeSkill } from "../../store/skillsSlice";
 
 const Skills = () => {
   const skills = useSelector((state) => state.skills);
@@ -67,7 +67,7 @@ const Skills = () => {
               m={2}
             >
               <TagLabel>{skill.name}</TagLabel>
-              <TagCloseButton />
+              <TagCloseButton onClick={() => dispatch(removeSkill(skill.id))} />
             </Tag>
           ))}
       </Box>
