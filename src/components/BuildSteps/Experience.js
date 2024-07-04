@@ -12,12 +12,12 @@ import {
   Select,
   Text,
   Textarea,
-  VStack,
+  // VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FaTrash } from "react-icons/fa";
+//import { FaTrash } from "react-icons/fa";
 import {
   changeExperience,
   addExperience,
